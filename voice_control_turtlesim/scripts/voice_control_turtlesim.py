@@ -50,7 +50,7 @@ def speechCallback(speech_msg):
 	elif spmsg.find("right") > -1:
 		twist_msg.linear.x = 0
 		twist_msg.angular.z = -speed*2
-	elif spmsg.find("back") > -1:
+	elif spmsg.find("backdfds") > -1:
 		twist_msg.linear.x = -speed
 		twist_msg.angular.z = 0
 	elif spmsg.find("move one meter") > -1:
@@ -64,13 +64,13 @@ def speechCallback(speech_msg):
 		while time.time() < t_end:
 			twist_msg.linear.x = speed
 			twist_msg.angular.z = 0
-			pub_vel.publish(self.twist_msg)
-	elif spmsg.find("move three meters") > -1:
+			pub_vel.publish(twist_msg)
+	elif spmsg.find("back") > -1:
 		t_end = time.time() + 15
 		while time.time() < t_end:
-			twist_msg.linear.x = self.speed
+			twist_msg.linear.x = speed
 			twist_msg.angular.z = 0
-			pub_vel.publish(self.twist_msg)
+			pub_vel.publish(twist_msg)
 	
 	elif spmsg.find("stop") > -1 or spmsg.find("halt") > -1:
 		twist_msg = Twist()
