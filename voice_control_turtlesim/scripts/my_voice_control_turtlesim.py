@@ -35,7 +35,7 @@ def speechCallback(speech_msg):
 	
 	# Lettura della parola riconosciuta
 	rospy.loginfo(speech_msg.data)
-	spmsg = speech_msg.data
+	nomecommando = speech_msg.data
 	
 	# Creazione del messaggio e inizializzazione di tutti i campi a zero
 	twist_msg = Twist()
@@ -43,7 +43,7 @@ def speechCallback(speech_msg):
 	# Creazione di un commando generico (nomecommando, linear.x, linear.y, linear.z, angular.x, angular.y, angular.z, type, time):
 	# Lettura del tipo di messaggio e di quante volte deve essere esseguito (0 = 1 volta)
 	type_cmd = dic_cmd[nomecommando][6]
-	time_cmd = dic_cmd[nomecommando][7]
+	time_cmd = int(dic_cmd[nomecommando][7])
 	
 	if type_cmd.lower() == 'x':
 		
@@ -93,16 +93,160 @@ def speechCallback(speech_msg):
 			
 	elif type_cmd.lower() == 'a':
 		
+		spflag = False
+		
 		#ampificazione linear.x
 		amp_operator = dic_cmd[nomecommando][0][0]
 		if amp_operator == '+':
-			pass
+			twist_msg.linear.x += float(dic_cmd[nomecommando][0][1:])
+			if not spflag:
+				speed += float(dic_cmd[nomecommando][0][1:])
+				spflag = True
 		elif amp_operator == '-':
-			pass
+			twist_msg.linear.x -= float(dic_cmd[nomecommando][0][1:])
+			if not spflag:
+				speed -= float(dic_cmd[nomecommando][0][1:])
+				spflag = True
 		elif amp_operator == '*':
-			pass
+			twist_msg.linear.x *= float(dic_cmd[nomecommando][0][1:])
+			if not spflag:
+				speed *= float(dic_cmd[nomecommando][0][1:])
+				spflag = True
 		elif amp_operator == '/':
-			pass
+			twist_msg.linear.x /= float(dic_cmd[nomecommando][0][1:])
+			if not spflag:
+				speed /= float(dic_cmd[nomecommando][0][1:])
+				spflag = True
+		else:
+			print("Errore: tipo commando non ammesso [inserire solo operatori +,-,*,/ nel dizionario]")
+			quit()
+			
+		#ampificazione linear.y
+		amp_operator = dic_cmd[nomecommando][1][0]
+		if amp_operator == '+':
+			twist_msg.linear.y += float(dic_cmd[nomecommando][1][1:])
+			if not spflag:
+				speed += float(dic_cmd[nomecommando][1][1:])
+				spflag = True
+		elif amp_operator == '-':
+			twist_msg.linear.y -= float(dic_cmd[nomecommando][1][1:])
+			if not spflag:
+				speed -= float(dic_cmd[nomecommando][1][1:])
+				spflag = True
+		elif amp_operator == '*':
+			twist_msg.linear.y *= float(dic_cmd[nomecommando][1][1:])
+			if not spflag:
+				speed *= float(dic_cmd[nomecommando][1][1:])
+				spflag = True
+		elif amp_operator == '/':
+			twist_msg.linear.y /= float(dic_cmd[nomecommando][1][1:])
+			if not spflag:
+				speed /= float(dic_cmd[nomecommando][1][1:])
+				spflag = True
+		else:
+			print("Errore: tipo commando non ammesso [inserire solo operatori +,-,*,/ nel dizionario]")
+			quit()
+			
+		#ampificazione linear.z
+		amp_operator = dic_cmd[nomecommando][2][0]
+		if amp_operator == '+':
+			twist_msg.linear.z += float(dic_cmd[nomecommando][2][1:])
+			if not spflag:
+				speed += float(dic_cmd[nomecommando][2][1:])
+				spflag = True
+		elif amp_operator == '-':
+			twist_msg.linear.z -= float(dic_cmd[nomecommando][2][1:])
+			if not spflag:
+				speed -= float(dic_cmd[nomecommando][2][1:])
+				spflag = True
+		elif amp_operator == '*':
+			twist_msg.linear.z *= float(dic_cmd[nomecommando][2][1:])
+			if not spflag:
+				speed *= float(dic_cmd[nomecommando][2][1:])
+				spflag = True
+		elif amp_operator == '/':
+			twist_msg.linear.z /= float(dic_cmd[nomecommando][2][1:])
+			if not spflag:
+				speed /= float(dic_cmd[nomecommando][2][1:])
+				spflag = True
+		else:
+			print("Errore: tipo commando non ammesso [inserire solo operatori +,-,*,/ nel dizionario]")
+			quit()
+			
+		#ampificazione angular.x
+		amp_operator = dic_cmd[nomecommando][3][0]
+		if amp_operator == '+':
+			twist_msg.angular.x += float(dic_cmd[nomecommando][3][1:])
+			if not spflag:
+				speed += float(dic_cmd[nomecommando][3][1:])
+				spflag = True
+		elif amp_operator == '-':
+			twist_msg.angular.x -= float(dic_cmd[nomecommando][3][1:])
+			if not spflag:
+				speed -= float(dic_cmd[nomecommando][3][1:])
+				spflag = True
+		elif amp_operator == '*':
+			twist_msg.angular.x *= float(dic_cmd[nomecommando][3][1:])
+			if not spflag:
+				speed *= float(dic_cmd[nomecommando][3][1:])
+				spflag = True
+		elif amp_operator == '/':
+			twist_msg.angular.x /= float(dic_cmd[nomecommando][3][1:])
+			if not spflag:
+				speed /= float(dic_cmd[nomecommando][3][1:])
+				spflag = True
+		else:
+			print("Errore: tipo commando non ammesso [inserire solo operatori +,-,*,/ nel dizionario]")
+			quit()
+			
+		#ampificazione angular.y
+		amp_operator = dic_cmd[nomecommando][4][0]
+		if amp_operator == '+':
+			twist_msg.angular.y += float(dic_cmd[nomecommando][4][1:])
+			if not spflag:
+				speed += float(dic_cmd[nomecommando][4][1:])
+				spflag = True
+		elif amp_operator == '-':
+			twist_msg.angular.y -= float(dic_cmd[nomecommando][4][1:])
+			if not spflag:
+				speed -= float(dic_cmd[nomecommando][4][1:])
+				spflag = True
+		elif amp_operator == '*':
+			twist_msg.angular.y *= float(dic_cmd[nomecommando][4][1:])
+			if not spflag:
+				speed *= float(dic_cmd[nomecommando][4][1:])
+				spflag = True
+		elif amp_operator == '/':
+			twist_msg.angular.y /= float(dic_cmd[nomecommando][4][1:])
+			if not spflag:
+				speed /= float(dic_cmd[nomecommando][4][1:])
+				spflag = True
+		else:
+			print("Errore: tipo commando non ammesso [inserire solo operatori +,-,*,/ nel dizionario]")
+			quit()
+		
+		#ampificazione angular.z
+		amp_operator = dic_cmd[nomecommando][5][0]
+		if amp_operator == '+':
+			twist_msg.angular.z += float(dic_cmd[nomecommando][5][1:])
+			if not spflag:
+				speed += float(dic_cmd[nomecommando][5][1:])
+				spflag = True
+		elif amp_operator == '-':
+			twist_msg.angular.z -= float(dic_cmd[nomecommando][5][1:])
+			if not spflag:
+				speed -= float(dic_cmd[nomecommando][5][1:])
+				spflag = True
+		elif amp_operator == '*':
+			twist_msg.angular.z *= float(dic_cmd[nomecommando][5][1:])
+			if not spflag:
+				speed *= float(dic_cmd[nomecommando][5][1:])
+				spflag = True
+		elif amp_operator == '/':
+			twist_msg.angular.z /= float(dic_cmd[nomecommando][5][1:])
+			if not spflag:
+				speed /= float(dic_cmd[nomecommando][5][1:])
+				spflag = True
 		else:
 			print("Errore: tipo commando non ammesso [inserire solo operatori +,-,*,/ nel dizionario]")
 			quit()
@@ -112,54 +256,6 @@ def speechCallback(speech_msg):
 		print("Errore: tipo commando non ammesso [inserire solo a,x nel dizionario]")
 		quit()
 
-	
-	# Controllo di quale comando è richiesto:
-	
-	# - Controllo velocità
-	if spmsg.find("full speed") > -1:
-		if speed == 0.2:
-			twist_msg.linear.x *= 2
-			twist_msg.angular.z *= 2
-			speed = 0.4
-	if spmsg.find("half speed") > -1:
-		if speed == 0.4:
-			twist_msg.linear.x /= 2
-			twist_msg.angular.z /= 2
-			speed = 0.2
-			
-	if spmsg.find("forward") > -1:
-		twist_msg.linear.x = speed
-		twist_msg.angular.z = 0
-	elif spmsg.find("left") > -1:
-		twist_msg.linear.x = 0
-		twist_msg.angular.z = speed*2
-	elif spmsg.find("right") > -1:
-		twist_msg.linear.x = 0
-		twist_msg.angular.z = -speed*2
-	elif spmsg.find("back") > -1:
-		twist_msg.linear.x = -speed
-		twist_msg.angular.z = 0
-	elif spmsg.find("move one meter") > -1:
-		t_end = time.time() + 5
-		while time.time() < t_end:
-			twist_msg.linear.x = speed
-			twist_msg.angular.z = 0
-			pub_vel.publish(twist_msg)
-	elif spmsg.find("move two meters") > -1:
-		t_end = time.time() + 10
-		while time.time() < t_end:
-			twist_msg.linear.x = speed
-			twist_msg.angular.z = 0
-			pub_vel.publish(self.twist_msg)
-	elif spmsg.find("move three meters") > -1:
-		t_end = time.time() + 15
-		while time.time() < t_end:
-			twist_msg.linear.x = self.speed
-			twist_msg.angular.z = 0
-			pub_vel.publish(self.twist_msg)
-	
-	elif spmsg.find("stop") > -1 or spmsg.find("halt") > -1:
-		twist_msg = Twist()
 		
 	
 	#Publicazione del messaggio
@@ -167,6 +263,15 @@ def speechCallback(speech_msg):
 
 if __name__ == "__main__":
 	
+	#Lettura dizionario commandi	
+	cmd_file = open("/home/geodimi/catkin_ws/src/voice_control_turtlesim/scripts/turtlecmd.csv",'r')
+	
+	for row in cmd_file:
+		cmd_row = row.strip().split(',')
+		dic_cmd[cmd_row[0]] = (cmd_row[1],cmd_row[2],cmd_row[3],cmd_row[4],cmd_row[5],cmd_row[6],cmd_row[7],cmd_row[8])
+	cmd_file.close()
+	
+	#Settaggio ROS
 	try:
 		# Dicchiaro il nome del nodo al nodo Master
 		rospy.init_node("voice_control_TurtleSim", anonymous=True)

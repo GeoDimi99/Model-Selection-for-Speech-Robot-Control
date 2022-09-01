@@ -1,0 +1,9 @@
+full speed,*2,+0,+0,+0,+0,*2,a,0
+half speed,/2,+0,+0,+0,+0,/2,a,0
+forward,speed,0,0,0,0,0,x,0
+left,0,0,0,0,0,2*speed,x,0
+right,0,0,0,0,0,-2*speed,x,0
+back,-1*speed,0,0,0,0,0,x,0
+move one meter,speed,0,0,0,0,0,x,5
+move two meters,speed,0,0,0,0,0,x,10
+move three meters,speed,0,0,0,0,0,x,15
