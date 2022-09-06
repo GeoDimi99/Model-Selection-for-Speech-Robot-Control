@@ -267,6 +267,7 @@ if __name__ == "__main__":
 	cmd_file = open("/home/geodimi/catkin_ws/src/voice_control_turtlesim/scripts/turtlecmd.csv",'r')
 	cmd_file.readline()
 	for row in cmd_file:
+		print(row)
 		cmd_row = row.strip().split(',')
 		dic_cmd[cmd_row[0]] = (cmd_row[1],cmd_row[2],cmd_row[3],cmd_row[4],cmd_row[5],cmd_row[6],cmd_row[7],cmd_row[8])
 	cmd_file.close()
@@ -277,7 +278,7 @@ if __name__ == "__main__":
 		rospy.init_node("voice_control_TurtleSim", anonymous=True)
 		
 		#Dicchiaro di essere un Publisher del topic "cmd_vel" con messaggio Twist
-		pub_vel = rospy.Publisher("/cmd_vel",Twist,queue_size = 10)
+		pub_vel = rospy.Publisher("/turtle1/cmd_vel",Twist,queue_size = 10)
 		
 		# Dicchiaro di essere un subscriber del topic "/speech_recognition/final_result" con tipo di messaggio String
 		rospy.Subscriber("/speech_recognition/final_result", String, speechCallback)

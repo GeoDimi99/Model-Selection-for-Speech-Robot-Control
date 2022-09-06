@@ -8,3 +8,4 @@ back,-1*speed,0,0,0,0,0,x,0
 move one meter,speed,0,0,0,0,0,x,5
 move two meters,speed,0,0,0,0,0,x,10
 move three meters,speed,0,0,0,0,0,x,15
+stop,0,0,0,0,0,0,x,0

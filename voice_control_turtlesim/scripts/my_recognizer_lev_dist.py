@@ -7,6 +7,36 @@ from std_msgs.msg import String
 from google.cloud import speech
 import io
 
+#Variabili globali
+word_list = []
+
+def Distance(str1,str2):
+
+    # Inizializzazione a zero della matrice di dimensione (m+1)x(n+1)
+    m=len(str1)+1
+    n=len(str2)+1
+    D = [[0 for k in range(n)] for k in range(m)]
+
+    # Assegnazione delle soluzioni ai problemi banali
+    for i in range(1,m):
+        D[i][0]=i
+    for j in range(1,n):
+        D[0][j]=j
+
+    # Cicli annidati per la risoluzione dei sottoproblemi
+    for i in range(1,m):
+        for j in range(1,n):
+
+            # Se i caratteri sono diversi
+            if str1[i-1]!=str2[j-1]:
+                D[i][j]=1+min(D[i][j-1],D[i-1][j],D[i-1][j-1])
+
+            # Se i caratteri sono uguali
+            else:
+                D[i][j]= D[i-1][j-1]
+
+    # Restituisce la soluzione del problema
+    return D[len(str1)][len(str2)]
 
 
 def publisher_speech():
@@ -58,11 +88,26 @@ def publisher_speech():
 		for result in response.results:
 			sp_text += result.alternatives[0].transcript
 		
+		print("Parola riconosciuta:",sp_text)
+		
+		#CONTROLLO ERRORE: Distanza di Levinshtain
+		min_dist = Distance(sp_text, word_list[0])
+		min_word = word_list[0]
+		print("Distanza", min_word, ":", min_dist)
+		
+		for word in word_list[1:]:
+			dist = Distance(sp_text, word)
+			print("Distanza",word,":",dist)
+			if dist < min_dist:
+				min_dist = dist
+				min_word = word
+		
+			
 		
 		
 		#Crea Messaggio
 		sp_msg = String()
-		sp_msg = sp_text
+		sp_msg = min_word
 		
 		#Invio messaggio
 		pub_speech.publish(sp_msg)
@@ -77,6 +122,13 @@ def publisher_speech():
 
 if __name__ == "__main__":
 	
+	#Lettura dizionario commandi	
+	cmd_file = open("/home/geodimi/catkin_ws/src/voice_control_turtlesim/scripts/turtlecmd.csv",'r')
+	cmd_file.readline()
+	for row in cmd_file:
+		cmd_row = row.strip().split(',')
+		word_list.append(cmd_row[0])
+	cmd_file.close()
 	
 	
 	try:

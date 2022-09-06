@@ -164,6 +164,7 @@ include_directories(
    scripts/my_voice_control_turtlesim.py
    scripts/my_recognizer.py
    scripts/voice_control_turtlesim.py
+   scripts/my_recognizer_lev_dist.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
