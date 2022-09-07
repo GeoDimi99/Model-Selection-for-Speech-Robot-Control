@@ -267,7 +267,6 @@ if __name__ == "__main__":
 	cmd_file = open("/home/geodimi/catkin_ws/src/voice_control_turtlesim/scripts/turtlecmd.csv",'r')
 	cmd_file.readline()
 	for row in cmd_file:
-		print(row)
 		cmd_row = row.strip().split(',')
 		dic_cmd[cmd_row[0]] = (cmd_row[1],cmd_row[2],cmd_row[3],cmd_row[4],cmd_row[5],cmd_row[6],cmd_row[7],cmd_row[8])
 	cmd_file.close()
