@@ -7,10 +7,10 @@ from google.cloud import speech
 import io
 
 #Variabili globali
-word_list = ["back", "forward", "full speed", "half speed", "left", "move one meter", "move three meters", "move two meters", ]
+word_list = ["back", "forward", "full speed", "half speed", "left", "move one meter", "move three meters", "move two meters", "right","stop"]
 
 dataset_size = 2
-dataset_audio_path = "/home/geodimi/catkin_ws/src/recognizer_naive_bayes/dataset_test_audio/"
+dataset_audio_path = "/home/geodimi/catkin_ws/src/datasets/dataset_test_audio/"
 audio_extension = ".wav"
 
 dirname_list = ["back", "forward", "full_speed", "half_speed", "left", "move_one_meter", "move_three_meter", "move_two_meters", "right", "stop", "right", "stop"]
@@ -61,7 +61,7 @@ def Distance(str1,str2):
     return D[len(str1)][len(str2)]
 
 
-def publisher_speech():
+def test_speech():
 	
 	
 	# Dicchiaro un client per l'API
@@ -106,9 +106,11 @@ def publisher_speech():
 			#CONTROLLO ERRORE: Distanza di Levinshtain
 			min_dist = Distance(sp_text, word_list[0])
 			min_word = word_list[0]
+			print("dis",min_word,":",min_dist)
 		
 			for word in word_list[1:]:
 				dist = Distance(sp_text, word)
+				print("dis",word,":",dist)
 				if dist < min_dist:
 					min_dist = dist
 					min_word = word
@@ -124,5 +126,5 @@ def publisher_speech():
 
 if __name__ == "__main__":
 	
-	publisher_speech()
+	test_speech()
 	

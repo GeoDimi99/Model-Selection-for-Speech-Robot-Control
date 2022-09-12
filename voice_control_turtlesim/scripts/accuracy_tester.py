@@ -10,7 +10,7 @@ import io
 #Variabili globali
 # Variabili Globali
 dataset_size = 2
-dataset_audio_path = "/home/geodimi/catkin_ws/src/recognizer_naive_bayes/dataset_test_audio/"
+dataset_audio_path = "/home/geodimi/catkin_ws/src/datasets/dataset_test_audio/"
 
 audio_extension = ".wav"
 
@@ -32,7 +32,7 @@ cmd_dic = {
 
 
 
-def publisher_speech():
+def test_speech():
 	
 	
 	# Dicchiaro un client per l'API
@@ -80,5 +80,5 @@ def publisher_speech():
 
 if __name__ == "__main__":
 	
-	publisher_speech()
+	test_speech()
 	
