@@ -52,4 +52,3 @@ Il modello è stato addestrato per correggere gli errori di riconoscimento, ma n
 ## Autore
 
 - **Georgi Dimitrov**
-- 
